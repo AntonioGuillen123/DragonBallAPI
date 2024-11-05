@@ -1,6 +1,6 @@
 const URLBASE = "https://dragonball-api.com/api"
 
-export const fetchDBAPIAsync = async ({ url, params = "" }) => {
+const fetchDBAPIAsync = async ({ url, params = "" }) => {
   let data
 
   try {
@@ -15,3 +15,17 @@ export const fetchDBAPIAsync = async ({ url, params = "" }) => {
 
   return data
 }
+
+export const getAllAsync = async (url) => {
+    const searchParams = {
+      url: url,
+    }
+  
+    const fullData = await fetchDBAPIAsync(searchParams)
+  
+    const totalItems = fullData?.meta.totalItems
+  
+    searchParams.params = `?limit=${totalItems}`
+  
+    return await fetchDBAPIAsync(searchParams)
+  }
