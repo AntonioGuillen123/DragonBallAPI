@@ -41,7 +41,7 @@ const displayCharacters = (characters) => {
     dataContainer.classList.add('m-2', 'mt-8', 'flex', 'flex-col', 'gap-[.5rem]')
 
     const raceAndGender = document.createElement('p')
-    raceAndGender.classList.add('text-center', 'font-bold', 'text-[1.1rem]', 'text-[#D6D7D7]')
+    raceAndGender.classList.add('text-center', 'font-bold', 'text-[1rem]', 'text-[#D6D7D7]')
     raceAndGender.innerHTML = `${characterRace} - ${characterGender}`
 
     const battleStats = document.createElement('div')
