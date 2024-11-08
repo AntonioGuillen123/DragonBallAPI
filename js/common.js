@@ -31,7 +31,7 @@ export const getAllAsync = async (url) => {
 }
 
 export const searchBar = (value, elements) => {
-  return elements.filter((item) => item.name.includes(value))
+  return elements.filter((item) => item.name.toUpperCase().includes(value.toUpperCase()))
 }
 
 export const resultNotFound = () => {
