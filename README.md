@@ -1,5 +1,5 @@
 
-## DragonBallAPI
+# DragonBallAPI
 
 This project shows a representation of what a front end would be using the API of:
 ```bash
