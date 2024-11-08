@@ -1,17 +1,23 @@
-import { getAllAsync } from "./common.js"
+import { getAllAsync, searchBar, resultNotFound } from "./common.js"
 
 const URL = '/planets'
 
 const mainAsync = async () => {
   const data = await getAllAsync(URL)
 
-  console.log(data)
+  const searchBarElement = document.getElementById('searchBar')
+  searchBarElement.addEventListener('keyup', (element) => {
+    const searchPlanets = searchBar(element.target.value, data.items)
+
+    searchPlanets.length !== 0 ? displayPlanets(searchPlanets) : resultNotFound()
+  })
 
   displayPlanets(data.items)
 }
 
 const displayPlanets = (planets) => {
   const planetsContainer = document.querySelector('main')
+  planetsContainer.innerHTML = ''
 
   planets.forEach((item) => {
     const planetImage = item.image
@@ -29,7 +35,7 @@ const displayPlanets = (planets) => {
     img.classList.add('w-full', 'h-[21rem]', 'rounded-t-xl')
     img.setAttribute('src', planetImage)
     img.setAttribute('alt', `This it´s a image of Planet ${planetName}`)
-    
+
     const figCaption = document.createElement('figcaption')
     figCaption.classList.add('text-[1.35rem]', 'absolute', 'bottom-0', 'font-bold', 'h-0')
     figCaption.innerHTML = planetName

@@ -1,17 +1,23 @@
-import { getAllAsync } from "./common.js"
+import { getAllAsync, searchBar, resultNotFound } from "./common.js"
 
 const URL = '/characters'
 
 const mainAsync = async () => {
   const data = await getAllAsync(URL)
 
-  console.log(data)
+  const searchBarElement = document.getElementById('searchBar')
+  searchBarElement.addEventListener('keyup', (element) => {
+    const searchCharacters = searchBar(element.target.value, data.items)
+
+    searchCharacters.length !== 0 ? displayCharacters(searchCharacters) : resultNotFound()
+  })
 
   displayCharacters(data.items)
 }
 
 const displayCharacters = (characters) => {
   const charactersContainer = document.querySelector('main')
+  charactersContainer.innerHTML = ''
 
   characters.forEach((item) => {
     const characterImage = item.image
@@ -29,10 +35,10 @@ const displayCharacters = (characters) => {
     figure.classList.add('relative', 'flex', 'justify-center')
 
     const img = document.createElement('img')
-    img.classList.add('w-max', 'h-[21rem]','transform', 'transition', 'duration-300', 'ease-out', 'hover:scale-150', 'hover:z-10')
+    img.classList.add('w-max', 'h-[21rem]', 'transform', 'transition', 'duration-300', 'ease-out', 'hover:scale-150', 'hover:z-10')
     img.setAttribute('src', characterImage)
     img.setAttribute('alt', `This it´s a image of ${characterName}`)
-    
+
     const figCaption = document.createElement('figcaption')
     figCaption.classList.add('text-[1.35rem]', 'absolute', 'bottom-0', 'font-bold', 'h-0')
     figCaption.innerHTML = characterName
@@ -67,7 +73,7 @@ const displayCharacters = (characters) => {
     const maxKiValue = document.createElement('p')
     maxKiValue.classList.add('text-[.9rem]')
     maxKiValue.innerHTML = characterMaxKi !== '0' ? characterMaxKi : 'Without Max Ki'
-    
+
     const affiliationContainer = document.createElement('div')
     affiliationContainer.classList.add('flex', 'justify-between')
 
