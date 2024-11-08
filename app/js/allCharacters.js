@@ -29,7 +29,7 @@ const displayCharacters = (characters) => {
     figure.classList.add('relative', 'flex', 'justify-center')
 
     const img = document.createElement('img')
-    img.classList.add('w-max', 'h-[21rem]')
+    img.classList.add('w-max', 'h-[21rem]','transform', 'transition', 'duration-300', 'ease-out', 'hover:scale-150', 'hover:z-10')
     img.setAttribute('src', characterImage)
     img.setAttribute('alt', `This it´s a image of ${characterName}`)
     
